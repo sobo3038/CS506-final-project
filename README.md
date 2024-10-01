@@ -5,7 +5,6 @@ Description: This project will be a predictive model that can forecast the box o
 
 
 Clear goal:
-
 	- Predict the box office revenue for an upcoming movie before its release using historical data on similar movies
 	- Analyze the importance of different features (ex. Cast, budget, genre, etc.) in determining box office success
 
