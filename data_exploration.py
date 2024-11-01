@@ -4,8 +4,8 @@ import seaborn as sns
 import os
 import numpy as np
 
-# Load data (assuming the file is named 'dataset.csv')
-data = pd.read_csv('data/movies.csv')
+# Load data (assuming the file is named 'data/movies_adjusted.csv')
+data = pd.read_csv('data/movies_adjusted.csv')
 
 # Ensure the folder exists
 output_folder = "data_engineering_images"
@@ -22,8 +22,8 @@ def save_plot(fig, filename):
     fig.savefig(os.path.join(output_folder, filename), bbox_inches='tight')
     plt.close(fig)
 
-# 1. Histograms for Numerical Variables with Binned Averages for budget, gross, and votes
-for column in ['votes', 'budget', 'gross']:
+# 1. Histograms for Numerical Variables with Binned Averages for adjusted budget, votes, and runtime
+for column in ['votes', 'budget_adjusted', 'runtime']:
     fig, axes = plt.subplots(1, 2, figsize=(15, 5))
 
     # Frequency histogram
@@ -32,97 +32,97 @@ for column in ['votes', 'budget', 'gross']:
     axes[0].set_xlabel(column)
     axes[0].set_ylabel('Frequency')
     
-    # Binned average plot
+    # Binned average plot with adjusted gross as target
     if data[column].notna().any():
         # Define bins for each variable
-        bins = np.linspace(data[column].min(), data[column].max(), 10)  # Adjust bin count if necessary
+        bins = np.linspace(data[column].min(), data[column].max(), 10)
         data[f'{column}_binned'] = pd.cut(data[column], bins=bins)
-        binned_avg = data.groupby(f'{column}_binned')['score'].mean()
+        binned_avg = data.groupby(f'{column}_binned')['gross_adjusted'].mean()
         
         # Plotting binned averages
         binned_avg.plot(kind='bar', ax=axes[1])
-        axes[1].set_title(f'Average Score by Binned {column.capitalize()}')
+        axes[1].set_title(f'Average Adjusted Gross by Binned {column.capitalize()}')
         axes[1].set_xlabel(f'{column.capitalize()} Range')
-        axes[1].set_ylabel('Average Score')
+        axes[1].set_ylabel('Average Adjusted Gross')
         axes[1].tick_params(axis='x', rotation=45)
     else:
         axes[1].text(0.5, 0.5, 'No data available', ha='center')
     
-    fig.suptitle(f'Analysis of {column.capitalize()}')
+    fig.suptitle(f'Analysis of {column.capitalize()} (Adjusted)')
     fig.tight_layout()
-    save_plot(fig, f'analysis_{column}_binned.png')
+    save_plot(fig, f'analysis_{column}_binned_adjusted.png')
 
-# 2. Scatter plots with `score`
+# 2. Scatter plots with `gross_adjusted`
 fig, axes = plt.subplots(2, 2, figsize=(15, 10))
-for ax, column in zip(axes.flatten(), ['votes', 'budget', 'gross', 'runtime']):
-    ax.scatter(data[column], data['score'], alpha=0.5)
-    ax.set_title(f'Score vs. {column}')
-    ax.set_xlabel(column)
-    ax.set_ylabel('Score')
-fig.suptitle('Scatter Plots of Score with Other Variables')
+for ax, column in zip(axes.flatten(), ['votes', 'budget_adjusted', 'runtime', 'release_year']):
+    ax.scatter(data[column], data['gross_adjusted'], alpha=0.5)
+    ax.set_title(f'Adjusted Gross vs. {column.capitalize()}')
+    ax.set_xlabel(column.capitalize())
+    ax.set_ylabel('Adjusted Gross')
+fig.suptitle('Scatter Plots of Adjusted Gross with Other Variables')
 fig.tight_layout()
-save_plot(fig, 'scatter_score_variables.png')
+save_plot(fig, 'scatter_gross_adjusted_variables.png')
 
 # 3. Box plots for categorical variables with 90° rotation
 for column in ['genre', 'rating', 'country']:
     fig, ax = plt.subplots(figsize=(10, 6))
-    data.boxplot(column='score', by=column, ax=ax)
-    ax.set_title(f'Score by {column.capitalize()}')
+    data.boxplot(column='gross_adjusted', by=column, ax=ax)
+    ax.set_title(f'Adjusted Gross by {column.capitalize()}')
     ax.set_xlabel(column.capitalize())
-    ax.set_ylabel('Score')
+    ax.set_ylabel('Adjusted Gross')
     ax.tick_params(axis='x', rotation=90)
     plt.suptitle('')
     fig.tight_layout()
-    save_plot(fig, f'boxplot_score_{column}.png')
+    save_plot(fig, f'boxplot_gross_adjusted_{column}.png')
 
-# 4. Average score over time (by year and by month)
+# 4. Average adjusted gross over time (by year and by month)
 fig, ax = plt.subplots()
-average_score_by_year = data.groupby('release_year')['score'].mean()
-ax.plot(average_score_by_year.index, average_score_by_year.values)
-ax.set_title('Average Score by Year')
+average_gross_by_year = data.groupby('release_year')['gross_adjusted'].mean()
+ax.plot(average_gross_by_year.index, average_gross_by_year.values)
+ax.set_title('Average Adjusted Gross by Year')
 ax.set_xlabel('Year')
-ax.set_ylabel('Average Score')
+ax.set_ylabel('Average Adjusted Gross')
 fig.tight_layout()
-save_plot(fig, 'average_score_by_year.png')
+save_plot(fig, 'average_gross_adjusted_by_year.png')
 
 fig, ax = plt.subplots()
-average_score_by_month = data.groupby('release_month')['score'].mean()
-ax.plot(average_score_by_month.index, average_score_by_month.values)
-ax.set_title('Average Score by Month')
+average_gross_by_month = data.groupby('release_month')['gross_adjusted'].mean()
+ax.plot(average_gross_by_month.index, average_gross_by_month.values)
+ax.set_title('Average Adjusted Gross by Month')
 ax.set_xlabel('Month')
-ax.set_ylabel('Average Score')
+ax.set_ylabel('Average Adjusted Gross')
 fig.tight_layout()
-save_plot(fig, 'average_score_by_month.png')
+save_plot(fig, 'average_gross_adjusted_by_month.png')
 
-# 5. Heatmap for average score by year and month
-average_score_by_year_month = data.groupby(['release_year', 'release_month'])['score'].mean().unstack()
-if not average_score_by_year_month.empty:
+# 5. Heatmap for average adjusted gross by year and month
+average_gross_by_year_month = data.groupby(['release_year', 'release_month'])['gross_adjusted'].mean().unstack()
+if not average_gross_by_year_month.empty:
     fig, ax = plt.subplots(figsize=(12, 8))
-    sns.heatmap(average_score_by_year_month, cmap="YlGnBu", ax=ax)
-    ax.set_title('Average Score by Year and Month')
+    sns.heatmap(average_gross_by_year_month, cmap="YlGnBu", ax=ax)
+    ax.set_title('Average Adjusted Gross by Year and Month')
     ax.set_xlabel('Month')
     ax.set_ylabel('Year')
     fig.tight_layout()
-    save_plot(fig, 'heatmap_score_by_year_month.png')
+    save_plot(fig, 'heatmap_gross_adjusted_by_year_month.png')
 else:
     print("No data available for year-month heatmap.")
 
-# 6. Top 10 by Directors, Writers, Stars, and Companies
+# 6. Top 10 by Directors, Writers, Stars, and Companies for Adjusted Gross
 fig, axes = plt.subplots(2, 2, figsize=(15, 12))
 for ax, column, label in zip(axes.flatten(), ['director', 'writer', 'star', 'company'], ['Directors', 'Writers', 'Stars', 'Companies']):
-    top_10 = data.groupby(column)['score'].mean().nlargest(10)
+    top_10 = data.groupby(column)['gross_adjusted'].mean().nlargest(10)
     top_10.plot(kind='bar', ax=ax)
-    ax.set_title(f'Top 10 {label} by Average Score')
+    ax.set_title(f'Top 10 {label} by Average Adjusted Gross')
     ax.set_xlabel(label)
-    ax.set_ylabel('Average Score')
+    ax.set_ylabel('Average Adjusted Gross')
     ax.tick_params(axis='x', rotation=90)
-fig.suptitle('Top Contributors by Average Score')
+fig.suptitle('Top Contributors by Average Adjusted Gross')
 fig.tight_layout()
-save_plot(fig, 'top_contributors_average_score.png')
+save_plot(fig, 'top_contributors_average_gross_adjusted.png')
 
-# 7. Enhanced Correlation Analysis with Pair Plot
-fig = sns.pairplot(data[['score', 'votes', 'budget', 'gross', 'runtime']].dropna())
-fig.fig.suptitle('Pair Plot of Numerical Variables', y=1.02)
-fig.savefig(os.path.join(output_folder, 'enhanced_pair_plot.png'), bbox_inches='tight')
+# 7. Enhanced Correlation Analysis with Pair Plot for Adjusted Gross
+fig = sns.pairplot(data[['gross_adjusted', 'votes', 'budget_adjusted', 'runtime', 'release_year']].dropna())
+fig.fig.suptitle('Pair Plot of Numerical Variables (with Adjusted Gross)', y=1.02)
+fig.savefig(os.path.join(output_folder, 'enhanced_pair_plot_gross_adjusted.png'), bbox_inches='tight')
 
 print("Graphs have been generated and saved in the 'data_engineering_images' folder.")
