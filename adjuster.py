@@ -28,8 +28,8 @@ movies_data['adjustment_factor'] = base_cpi / movies_data['CPI']
 movies_data['gross_adjusted'] = movies_data['gross'] * movies_data['adjustment_factor']
 movies_data['budget_adjusted'] = movies_data['budget'] * movies_data['adjustment_factor']
 
-# Drop unnecessary columns
-movies_data = movies_data.drop(columns=['Year', 'CPI', 'adjustment_factor'])
+# Drop the original non-adjusted money columns and other unnecessary columns
+movies_data = movies_data.drop(columns=['Year', 'CPI', 'adjustment_factor', 'gross', 'budget'])
 
 # Save the adjusted dataset as a new CSV
 movies_data.to_csv('data/movies_adjusted.csv', index=False)

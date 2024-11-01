@@ -1,0 +1,31 @@
+All Ratios and Interactions with Correlations:
+- votes_times_budget_adjusted: correlation with gross_adjusted = 0.75
+- score_times_budget_adjusted: correlation with gross_adjusted = 0.72
+- runtime_times_budget_adjusted: correlation with gross_adjusted = 0.69
+- year_times_budget_adjusted: correlation with gross_adjusted = 0.68
+- year_times_votes: correlation with gross_adjusted = 0.65
+- votes_times_runtime: correlation with gross_adjusted = 0.64
+- votes_to_runtime_ratio: correlation with gross_adjusted = 0.64
+- score_times_votes: correlation with gross_adjusted = 0.61
+- score_times_runtime: correlation with gross_adjusted = 0.28
+- year_times_runtime: correlation with gross_adjusted = 0.25
+- year_to_runtime_ratio: correlation with gross_adjusted = -0.24
+- year_times_score: correlation with gross_adjusted = 0.21
+- year_to_score_ratio: correlation with gross_adjusted = -0.16
+- year_to_votes_ratio: correlation with gross_adjusted = -0.11
+- score_to_votes_ratio: correlation with gross_adjusted = -0.11
+- score_to_runtime_ratio: correlation with gross_adjusted = -0.05
+- runtime_to_budget_adjusted_ratio: correlation with gross_adjusted = -0.04
+- year_to_budget_adjusted_ratio: correlation with gross_adjusted = -0.03
+- score_to_budget_adjusted_ratio: correlation with gross_adjusted = -0.03
+- votes_to_budget_adjusted_ratio: correlation with gross_adjusted = -0.01
+
+Suggested Features for Prediction (correlation > 0.75):
+- votes_times_budget_adjusted: correlation with gross_adjusted = 0.75
+- score_times_budget_adjusted: correlation with gross_adjusted = 0.72
+- runtime_times_budget_adjusted: correlation with gross_adjusted = 0.69
+- year_times_budget_adjusted: correlation with gross_adjusted = 0.68
+- year_times_votes: correlation with gross_adjusted = 0.65
+- votes_times_runtime: correlation with gross_adjusted = 0.64
+- votes_to_runtime_ratio: correlation with gross_adjusted = 0.64
+- score_times_votes: correlation with gross_adjusted = 0.61
