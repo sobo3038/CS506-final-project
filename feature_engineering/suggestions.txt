@@ -1,21 +1,22 @@
 All Ratios and Interactions with Correlations:
 - budget_adjusted_times_runtime: correlation with gross_adjusted = 0.69
-- budget_adjusted_to_runtime_ratio: correlation with gross_adjusted = 0.62
-- runtime_times_year: correlation with gross_adjusted = 0.25
-- runtime_times_release_month: correlation with gross_adjusted = nan
-- year_times_release_month: correlation with gross_adjusted = nan
 - budget_adjusted_times_year: correlation with gross_adjusted = 0.68
-- budget_adjusted_times_release_month: correlation with gross_adjusted = nan
-- runtime_to_year_ratio: correlation with gross_adjusted = 0.24
 - budget_adjusted_to_year_ratio: correlation with gross_adjusted = 0.68
+- budget_adjusted_to_runtime_ratio: correlation with gross_adjusted = 0.62
+- budget_adjusted_times_release_month: correlation with gross_adjusted = 0.59
+- budget_adjusted_to_release_month_ratio: correlation with gross_adjusted = 0.34
+- runtime_times_year: correlation with gross_adjusted = 0.25
+- runtime_to_year_ratio: correlation with gross_adjusted = 0.24
+- runtime_times_release_month: correlation with gross_adjusted = 0.14
+- year_to_release_month_ratio: correlation with gross_adjusted = -0.08
+- year_times_release_month: correlation with gross_adjusted = 0.07
+- runtime_to_release_month_ratio: correlation with gross_adjusted = -0.04
 
-Suggested Features for Prediction (correlation > 0.60):
+Suggested Features for Prediction (correlation > 0.65):
 - budget_adjusted_times_runtime: correlation with gross_adjusted = 0.69
 - budget_adjusted_times_year: correlation with gross_adjusted = 0.68
 - budget_adjusted_to_year_ratio: correlation with gross_adjusted = 0.68
-- budget_adjusted_to_runtime_ratio: correlation with gross_adjusted = 0.62
 
-Suggested Mean Aggregations for Categorical Variables (correlation > 0.60):
+Suggested Mean Aggregations for Categorical Variables (correlation > 0.65):
 - writer_mean_gross: correlation with gross_adjusted = 0.78
 - director_mean_gross: correlation with gross_adjusted = 0.72
-- star_mean_gross: correlation with gross_adjusted = 0.62

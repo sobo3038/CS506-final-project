@@ -11,8 +11,10 @@ data = pd.read_csv('data/movies_adjusted.csv')
 # Ensure we only work with adjusted monetary values and drop non-predictive columns
 data = data.drop(columns=['gross', 'budget', 'name', 'score', 'votes'], errors='ignore')
 
-# Extract `release_month` from the `released` column
-data['released'] = pd.to_datetime(data['released'], errors='coerce')
+# Extract date only from 'released' and parse it
+data['released'] = data['released'].str.extract(r'(\w+ \d{1,2}, \d{4})')[0]
+data['released'] = pd.to_datetime(data['released'], format='%B %d, %Y', errors='coerce')
+data['release_year'] = data['released'].dt.year
 data['release_month'] = data['released'].dt.month
 
 # Set paths and target variable
@@ -65,7 +67,7 @@ for (feature1, feature2) in combinations(numerical_features, 2):
         data[ratio_feature_name] = data[feature1] / data[feature2]
         correlation = data[[target, ratio_feature_name]].corr().iloc[0, 1]
         all_features.append((ratio_feature_name, correlation))
-        if abs(correlation) > 0.60:
+        if abs(correlation) > 0.65:
             suggested_features.append((ratio_feature_name, correlation))
         data.drop(columns=[ratio_feature_name], inplace=True)
 
@@ -74,7 +76,7 @@ for (feature1, feature2) in combinations(numerical_features, 2):
     data[interaction_feature_name] = data[feature1] * data[feature2]
     correlation = data[[target, interaction_feature_name]].corr().iloc[0, 1]
     all_features.append((interaction_feature_name, correlation))
-    if abs(correlation) > 0.60:
+    if abs(correlation) > 0.65:
         suggested_features.append((interaction_feature_name, correlation))
     data.drop(columns=[interaction_feature_name], inplace=True)
 
@@ -111,13 +113,13 @@ with open(suggestions_file, 'w') as file:
     for feature, corr in sorted(all_features, key=lambda x: abs(x[1]), reverse=True):
         file.write(f"- {feature}: correlation with {target} = {corr:.2f}\n")
     
-    file.write("\nSuggested Features for Prediction (correlation > 0.60):\n")
+    file.write("\nSuggested Features for Prediction (correlation > 0.65):\n")
     for feature, corr in sorted(suggested_features, key=lambda x: abs(x[1]), reverse=True):
         file.write(f"- {feature}: correlation with {target} = {corr:.2f}\n")
     
-    file.write("\nSuggested Mean Aggregations for Categorical Variables (correlation > 0.60):\n")
+    file.write("\nSuggested Mean Aggregations for Categorical Variables (correlation > 0.65):\n")
     for feature, corr in sorted(mean_aggregates.items(), key=lambda x: abs(x[1]), reverse=True):
-        if abs(corr) > 0.60:
+        if abs(corr) > 0.65:
             file.write(f"- {feature}: correlation with {target} = {corr:.2f}\n")
 
 print(f"All correlations and suggestions saved to {suggestions_file}")
