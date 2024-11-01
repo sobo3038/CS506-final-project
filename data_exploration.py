@@ -120,9 +120,31 @@ fig.suptitle('Top Contributors by Average Adjusted Gross')
 fig.tight_layout()
 save_plot(fig, 'top_contributors_average_gross_adjusted.png')
 
-# 7. Enhanced Correlation Analysis with Pair Plot for Adjusted Gross
-fig = sns.pairplot(data[['gross_adjusted', 'votes', 'budget_adjusted', 'runtime', 'release_year']].dropna())
-fig.fig.suptitle('Pair Plot of Numerical Variables (with Adjusted Gross)', y=1.02)
-fig.savefig(os.path.join(output_folder, 'enhanced_pair_plot_gross_adjusted.png'), bbox_inches='tight')
+# 7. Enhanced Correlation Analysis with Pair Plot for Adjusted Gross including Score
+fig = sns.pairplot(data[['gross_adjusted', 'votes', 'budget_adjusted', 'runtime', 'release_year', 'score']].dropna())
+fig.fig.suptitle('Pair Plot of Numerical Variables (with Adjusted Gross and Score)', y=1.02)
+fig.savefig(os.path.join(output_folder, 'enhanced_pair_plot_gross_adjusted_with_score.png'), bbox_inches='tight')
+
+# 8. Additional Analysis: Relationship between Score and Adjusted Gross
+# Scatter plot of Score vs. Adjusted Gross
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.scatter(data['score'], data['gross_adjusted'], alpha=0.5)
+ax.set_title('Score vs. Adjusted Gross')
+ax.set_xlabel('Score')
+ax.set_ylabel('Adjusted Gross')
+fig.tight_layout()
+save_plot(fig, 'scatter_score_vs_adjusted_gross.png')
+
+# Binned Score vs. Average Adjusted Gross
+fig, ax = plt.subplots(figsize=(10, 6))
+score_bins = pd.cut(data['score'], bins=np.arange(0, 10.5, 1))  # Bins from 0 to 10 with a step of 1
+average_gross_by_score_bin = data.groupby(score_bins)['gross_adjusted'].mean()
+average_gross_by_score_bin.plot(kind='bar', ax=ax)
+ax.set_title('Average Adjusted Gross by Binned Score')
+ax.set_xlabel('Score Range')
+ax.set_ylabel('Average Adjusted Gross')
+ax.tick_params(axis='x', rotation=45)
+fig.tight_layout()
+save_plot(fig, 'binned_score_vs_average_adjusted_gross.png')
 
 print("Graphs have been generated and saved in the 'data_engineering_images' folder.")
