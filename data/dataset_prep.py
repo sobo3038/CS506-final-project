@@ -14,7 +14,6 @@ data = data.drop(columns=['gross', 'budget', 'score', 'votes', 'released'], erro
 # Create new features
 data['budget_adjusted_times_runtime'] = data['budget_adjusted'] * data['runtime']
 data['budget_adjusted_times_year'] = data['budget_adjusted'] * data['year']
-data['budget_adjusted_to_year_ratio'] = data['budget_adjusted'] / data['year']
 
 # Create mean aggregation features
 data['writer_mean_gross'] = data.groupby('writer')['gross_adjusted'].transform('mean')
