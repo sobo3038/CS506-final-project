@@ -13,8 +13,8 @@ data = pd.read_csv('data/final_prediction_dataset.csv')
 # Drop rows where the target (revenue) is NaN
 data = data.dropna(subset=['gross_adjusted'])
 
-# Define the target as movie revenue (assumed to be `gross_adjusted`)
-y = data['gross_adjusted']  # Replace with the exact column if it’s named differently
+# Define the target as movie revenue 
+y = data['gross_adjusted']  
 X = data.drop(columns=['gross_adjusted'])  # Remove target from features
 
 # Select only numerical features for simplicity
