@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Office Revenue Prediction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Box Office Revenue Prediction</h1>
+        <p>Enter the details of a movie to predict its estimated box office revenue.</p>
+        
+        <form method="POST" class="prediction-form">
+            <label for="year">Year of Release</label>
+            <input type="number" id="year" name="year" placeholder="e.g., 1980" required>
+
+            <label for="budget">Budget (in dollars)</label>
+            <input type="number" id="budget" name="budget" placeholder="e.g., 4500000" required>
+
+            <label for="runtime">Runtime (in minutes)</label>
+            <input type="number" id="runtime" name="runtime" placeholder="e.g., 104" required>
+
+            <label for="release_month">Release Month</label>
+            <input type="number" id="release_month" name="release_month" placeholder="e.g., 7" required>
+
+            <button type="submit">Predict Revenue</button>
+        </form>
+
+        {% if prediction is not none %}
+            <div class="result">
+                <h2>Predicted Revenue</h2>
+                <p>${{ prediction }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
