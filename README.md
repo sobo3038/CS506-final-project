@@ -1,5 +1,8 @@
 # CS506 Final Project: Box Office Revenue Prediction
 
+## Youtube Link:
+https://youtu.be/Uk0iqkvShx0
+
 ## Description:
 This project will develop a predictive model that can forecast the box office success of upcoming movies based on various factors (cast, director, budget, genre, release date, etc.). The model will provide insights into the key elements that contribute to a movie’s box office performance. The data will be collected from **The Movie Database (TMDb) API**.
 
