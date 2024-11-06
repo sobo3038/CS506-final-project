@@ -72,6 +72,32 @@ Mean Squared Error (MSE): The MSE was high, but this is expected due to the larg
 
 The linear regression model provided a useful baseline, confirming that our selected features have strong predictive relationships with revenue. However, the limitations of a linear model became evident, as some patterns in the data may be better captured by non-linear methods. 
 
+## Step 7: Decision Tree Model
+To advance from a simple baseline and better understand the feature dynamics affecting movie revenue, we implemented a Decision Tree model. We chose this method for its interpretability and ability to capture non-linear relationships within the data. The decision tree's structure of if-then rules allowed us to observe the primary factors driving revenue and how features interact in hierarchical ways.
+
+Feature Selection and Preparation: Based on the results of our feature engineering, we utilized features with high correlations to revenue, such as budget_adjusted, runtime, release_month, and mean-encoded variables like genre_mean_gross. This feature selection aimed to identify key splits in the data where the variance in movie revenue is maximally reduced, a principle inherent to decision tree algorithms.
+
+Training the Model: We trained the Decision Tree model using the gross_adjusted as our target variable. The tree structure provided clear insights into which features were most influential in predicting revenue. While the model captured important patterns, it was prone to overfitting due to the nature of decision trees, which can memorize the training data when left unchecked.
+
+Model Evaluation: 
+R² Score: The Decision Tree model achieved an R² score of 0.67, explaining 67% of the variance in movie revenue. While this demonstrates a moderate level of predictive power, it highlights the limitations of a single tree in handling the complexity of the data.
+RMSE: The Root Mean Squared Error was 122,363,329.35, reflecting a substantial average prediction error. This high RMSE is expected, given the wide range of movie revenue figures and the decision tree’s tendency to create rigid splits that may not generalize well.
+
+Insights and Limitations: The Decision Tree model validated the importance of budget and other high-correlation features in predicting revenue. However, the model struggled with generalization and was sensitive to variations in the data, indicating the need for more robust ensemble methods to reduce overfitting and improve accuracy.
+
+## Step 8: Random Forest Model
+Building on the insights from the Decision Tree model, we implemented a Random Forest model to enhance prediction accuracy and mitigate overfitting. We selected Random Forest because it combines multiple decision trees to create an ensemble that is more robust and capable of capturing complex patterns in the data.
+
+Feature Selection and Preparation: The features selected for the Random Forest model were the same high-impact features used previously, such as budget_adjusted, runtime, release_month, and mean-encoded categorical variables. By using multiple trees and averaging their predictions, the Random Forest model capitalized on the strengths of each individual tree while reducing the variance associated with overfitting.
+
+Training the Model: We trained the Random Forest model with 100 decision trees and incorporated bootstrapping to ensure diverse and stable predictions. The ensemble approach allowed the model to learn a broader range of patterns, improving generalization and prediction accuracy. This method also helped capture interactions between features that a single decision tree would miss.
+
+Model Evaluation: 
+R² Score: The Random Forest model achieved an impressive R² score of 0.82, explaining 82% of the variance in movie revenue. This score represents a significant improvement over the Decision Tree model, indicating that the ensemble approach effectively captures more complex patterns in the data.
+RMSE: The RMSE was 89,611,379.28, significantly lower than that of the Decision Tree model. Although the error remains high due to the scale of movie revenue, the reduction in RMSE demonstrates that Random Forest offers more accurate and reliable predictions.
+
+Outcome: The Random Forest model successfully addressed the overfitting issues of the Decision Tree, providing a more accurate and generalizable prediction framework. The ensemble’s ability to capture non-linear interactions and reduce variance made it a strong contender for movie revenue prediction. However, there is still room for improvement, especially in handling outliers and extreme revenue values, which could benefit from additional feature engineering or advanced methods like boosting.
+
 # Proposal:
 --------------
 ## Description:
