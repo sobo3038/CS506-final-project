@@ -49,11 +49,17 @@ After this analysis, we prioritized features with correlations above 0.65, such 
 To complement our correlation findings, we created visualizations that allowed us to examine the data patterns more closely. Histograms were used to display the frequency distributions of key variables like adjusted budget and runtime, while scatter plots showed the relationships between gross_adjusted and influential predictors, such as budget_adjusted_times_runtime. These visualizations helped us confirm the correlations and observe trends within the data.
 
 For instance, scatter plots of budget_adjusted_times_runtime vs. gross_adjusted revealed a clear trend: as the interaction value increased, so did revenue, underscoring the importance of this feature. Heatmaps were used to consolidate and display correlation values for both numerical and categorical variables, visually highlighting the strength of key relationships. The visualizations provided additional evidence supporting our feature selection choices, reinforcing that the prioritized features had strong, observable connections with revenue.
+![image](https://github.com/user-attachments/assets/fa17090b-c6ee-4864-87c1-be15fb8b32c6)
+![image](https://github.com/user-attachments/assets/9c10fa8a-62ab-42f1-b29e-99e82c9f0d32)
+![image](https://github.com/user-attachments/assets/6b5d8145-8f08-4eff-872c-9a4948e20a4f)
 
 Final Dataset and Results
 After these stages, we finalized a dataset that included the most predictive pre-release features, standardized financial data, and relevant interaction and aggregation features. This dataset reflected a comprehensive approach to feature engineering and selection, grounded in the analysis of complex relationships between variables.
 
 The resulting model-ready dataset focused exclusively on realistic, pre-release indicators, offering a foundation for accurate, actionable revenue predictions. By carefully designing each feature and thoroughly analyzing its relevance, we ensured that our model could forecast revenue based on solid, data-driven insights without relying on post-release metrics, which could introduce bias or data leakage.
+![image](https://github.com/user-attachments/assets/e3b1d982-026b-4b91-90fc-c79088b67caa)
+![image](https://github.com/user-attachments/assets/ca7ac55c-0ecc-44b4-90b0-11b94574047c)
+![image](https://github.com/user-attachments/assets/c761ce68-c0d9-452b-aa2a-c1783758401d)
 
 ## Step 6: Baseline Linear Regression Model
 To establish an understanding of movie revenue prediction, we implemented linear regression as our baseline modeling approach. We chose to do linear regression because it provides a straightforward, interpretable framework for assessing the relationships between features and revenue. This baseline model allowed us to evaluate the predictive power of our engineered features before considering more complex methods.
