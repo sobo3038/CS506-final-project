@@ -55,9 +55,24 @@ After these stages, we finalized a dataset that included the most predictive pre
 
 The resulting model-ready dataset focused exclusively on realistic, pre-release indicators, offering a foundation for accurate, actionable revenue predictions. By carefully designing each feature and thoroughly analyzing its relevance, we ensured that our model could forecast revenue based on solid, data-driven insights without relying on post-release metrics, which could introduce bias or data leakage.
 
+## Step 6: Baseline Linear Regression Model
+To establish an understanding of movie revenue prediction, we implemented linear regression as our baseline modeling approach. We chose to do linear regression because it provides a straightforward, interpretable framework for assessing the relationships between features and revenue. This baseline model allowed us to evaluate the predictive power of our engineered features before considering more complex methods.
 
+Our primary goal was to see if a simple, linear model could capture the main drivers of revenue identified in our feature engineering and selection process. Features like writer_mean_gross and director_mean_gross showed high correlations with revenue, and we hypothesized that these variables, combined with our interaction terms, could yield strong predictive power even in a linear model.
 
+How the Linear Regression Model Was Built
 
+Feature Selection and Preparation: Based on our previous correlation analysis, we focused on high-correlation features, including interaction features such as budget_adjusted_times_runtime and historical performance metrics like writer_mean_gross. These features were prioritized for their strong linear relationships with gross_adjusted, our target variable.
+
+Training the Model: With the selected features, we trained a linear regression model using gross_adjusted as the target. Linear regression allowed us to assess how well these variables could predict revenue without introducing additional complexity. This step served as a benchmark for understanding how much variance in revenue could be explained by the engineered features alone.
+
+Model Evaluation and Interpretation
+
+R² Score: The model achieved an R² score of 0.73, indicating that it explains 73% of the variance in movie revenue. This score suggests that our selected features capture a good portion of revenue patterns, validating the importance of variables like writer_mean_gross and budget_adjusted_times_runtime.
+
+Mean Squared Error (MSE): The MSE was high, but this is expected due to the large scale of revenue values (often in millions or billions). This high MSE should be interpreted in context: it reflects the magnitude of the target variable rather than suggesting poor model accuracy. In this case, R² is a more meaningful indicator of the model’s effectiveness.
+
+The linear regression model provided a useful baseline, confirming that our selected features have strong predictive relationships with revenue. However, the limitations of a linear model became evident, as some patterns in the data may be better captured by non-linear methods. 
 
 # Proposal:
 --------------
