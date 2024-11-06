@@ -1,5 +1,7 @@
 # CS506 Final Project: Box Office Revenue Prediction
 
+# Midterm Report:
+--------------
 ## Youtube Link:
 https://youtu.be/Uk0iqkvShx0
 
