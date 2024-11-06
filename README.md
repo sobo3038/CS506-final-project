@@ -45,6 +45,9 @@ Among the aggregated features, writer_mean_gross and director_mean_gross stood o
 
 After this analysis, we prioritized features with correlations above 0.65, such as the interaction and aggregation metrics mentioned above, while de-prioritizing features with weaker correlations, such as runtime or release month interactions, which showed low to negligible relationships with revenue. This prioritization process ensured our model remained focused on the most predictive, meaningful indicators.
 ![image](https://github.com/user-attachments/assets/bb379551-2963-426e-8802-738665bae2c3)
+![image](https://github.com/user-attachments/assets/6f5052c5-bc8e-4834-bb98-93a753ba55bc)
+![image](https://github.com/user-attachments/assets/c711a44d-5a05-4f08-9d5c-d4c74d52a523)
+![image](https://github.com/user-attachments/assets/b34fbd6a-5c0e-4a2f-a651-1a0453b4260e)
 
 
 ## Step 5: Visualization and Data Insights
