@@ -50,7 +50,6 @@ To complement our correlation findings, we created visualizations that allowed u
 
 For instance, scatter plots of budget_adjusted_times_runtime vs. gross_adjusted revealed a clear trend: as the interaction value increased, so did revenue, underscoring the importance of this feature. Heatmaps were used to consolidate and display correlation values for both numerical and categorical variables, visually highlighting the strength of key relationships. The visualizations provided additional evidence supporting our feature selection choices, reinforcing that the prioritized features had strong, observable connections with revenue.
 ![image](https://github.com/user-attachments/assets/fa17090b-c6ee-4864-87c1-be15fb8b32c6)
-![image](https://github.com/user-attachments/assets/9c10fa8a-62ab-42f1-b29e-99e82c9f0d32)
 ![image](https://github.com/user-attachments/assets/6b5d8145-8f08-4eff-872c-9a4948e20a4f)
 
 Final Dataset and Results
