@@ -49,8 +49,6 @@ After this analysis, we prioritized features with correlations above 0.65, such 
 To complement our correlation findings, we created visualizations that allowed us to examine the data patterns more closely. Histograms were used to display the frequency distributions of key variables like adjusted budget and runtime, while scatter plots showed the relationships between gross_adjusted and influential predictors, such as budget_adjusted_times_runtime. These visualizations helped us confirm the correlations and observe trends within the data.
 
 For instance, scatter plots of budget_adjusted_times_runtime vs. gross_adjusted revealed a clear trend: as the interaction value increased, so did revenue, underscoring the importance of this feature. Heatmaps were used to consolidate and display correlation values for both numerical and categorical variables, visually highlighting the strength of key relationships. The visualizations provided additional evidence supporting our feature selection choices, reinforcing that the prioritized features had strong, observable connections with revenue.
-![image](https://github.com/user-attachments/assets/17874ebb-1e33-4c1a-941c-7b1c9c2bc8f6)
-![image](https://github.com/user-attachments/assets/534af6eb-65fd-4ae7-b051-599ce9005c62)
 
 
 Final Dataset and Results
