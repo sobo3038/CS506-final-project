@@ -60,13 +60,11 @@ To establish an understanding of movie revenue prediction, we implemented linear
 
 Our primary goal was to see if a simple, linear model could capture the main drivers of revenue identified in our feature engineering and selection process. Features like writer_mean_gross and director_mean_gross showed high correlations with revenue, and we hypothesized that these variables, combined with our interaction terms, could yield strong predictive power even in a linear model.
 
-How the Linear Regression Model Was Built
 
 Feature Selection and Preparation: Based on our previous correlation analysis, we focused on high-correlation features, including interaction features such as budget_adjusted_times_runtime and historical performance metrics like writer_mean_gross. These features were prioritized for their strong linear relationships with gross_adjusted, our target variable.
 
 Training the Model: With the selected features, we trained a linear regression model using gross_adjusted as the target. Linear regression allowed us to assess how well these variables could predict revenue without introducing additional complexity. This step served as a benchmark for understanding how much variance in revenue could be explained by the engineered features alone.
 
-Model Evaluation and Interpretation
 
 R² Score: The model achieved an R² score of 0.73, indicating that it explains 73% of the variance in movie revenue. This score suggests that our selected features capture a good portion of revenue patterns, validating the importance of variables like writer_mean_gross and budget_adjusted_times_runtime.
 
