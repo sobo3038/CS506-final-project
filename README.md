@@ -44,6 +44,8 @@ budget_adjusted_to_year_ratio: With a correlation of 0.68, this feature highligh
 Among the aggregated features, writer_mean_gross and director_mean_gross stood out with correlations of 0.78 and 0.72, respectively. These high values reaffirmed that the historical performance of a movie’s writer and director are crucial indicators of a movie’s financial prospects. Writers and directors with consistent box-office success are likely to bring strong audience appeal, translating into higher revenues.
 
 After this analysis, we prioritized features with correlations above 0.65, such as the interaction and aggregation metrics mentioned above, while de-prioritizing features with weaker correlations, such as runtime or release month interactions, which showed low to negligible relationships with revenue. This prioritization process ensured our model remained focused on the most predictive, meaningful indicators.
+![image](https://github.com/user-attachments/assets/bb379551-2963-426e-8802-738665bae2c3)
+
 
 ## Step 5: Visualization and Data Insights
 To complement our correlation findings, we created visualizations that allowed us to examine the data patterns more closely. Histograms were used to display the frequency distributions of key variables like adjusted budget and runtime, while scatter plots showed the relationships between gross_adjusted and influential predictors, such as budget_adjusted_times_runtime. These visualizations helped us confirm the correlations and observe trends within the data.
