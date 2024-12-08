@@ -1,69 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Box Office Revenue Prediction</title>
-    <link rel="stylesheet" href="style.css">
+   <title>Box Office Revenue Predictor</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   <style>
+       body {
+           font-family: 'Poppins', sans-serif;
+       }
+   </style>
 </head>
-<body>
-    <h1>Box Office Revenue Prediction</h1>
-    <p>Enter the details of a movie to predict its estimated box office revenue.</p>
-    
-    <form method="POST" action="/" style="display: flex; flex-direction: row; gap: 20px; align-items: center;">
-        <div>
-            <label for="year">Year of Release:</label>
-            <input type="number" name="year" placeholder="e.g., 1980" required style="width: 80px;">
-        </div>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+   <div class="container mx-auto px-4 py-12 max-w-4xl">
+       <h1 class="text-5xl font-bold text-indigo-800 mb-6 text-center">Box Office Revenue Predictor</h1>
+       <p class="text-xl text-gray-600 mb-12 text-center">Enter the details of a movie to predict its estimated box office revenue.</p>
 
-        <div>
-            <label for="budget">Budget (in dollars)</label>
-            <input type="range" name="budget" min="1000000" max="500000000" step="1000000" oninput="this.nextElementSibling.value = this.value" style="width: 150px;">
-            <output>45000000</output>
-        </div>
 
-        <div>
-            <label for="runtime">Runtime (in minutes)</label>
-            <input type="range" name="runtime" min="60" max="180" step="1" oninput="this.nextElementSibling.value = this.value" style="width: 150px;">
-            <output>120</output>
-        </div>
+       <form method="POST" action="/" class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+               <div class="space-y-6">
+                   <div>
+                       <label class="block text-sm font-medium text-gray-700 mb-2">Year of Release</label>
+                       <input name="year" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" type="number" placeholder="e.g. 2023" required>
+                   </div>
+                   <div>
+                       <label class="block text-sm font-medium text-gray-700 mb-2">Budget (USD)</label>
+                       <input name="budget" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" type="number" placeholder="e.g. 100000000" required>
+                   </div>
+                   <div>
+                       <label class="block text-sm font-medium text-gray-700 mb-2">Runtime (minutes)</label>
+                       <input name="runtime" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" type="number" placeholder="e.g. 120" required>
+                   </div>
+               </div>
+               <div class="space-y-6">
+                   <div>
+                       <label class="block text-sm font-medium text-gray-700 mb-2">Release Month</label>
+                       <select name="release_month" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" required>
+                           <option value="1">January</option>
+                           <option value="2">February</option>
+                           <option value="3">March</option>
+                           <option value="4">April</option>
+                           <option value="5">May</option>
+                           <option value="6">June</option>
+                           <option value="7">July</option>
+                           <option value="8">August</option>
+                           <option value="9">September</option>
+                           <option value="10">October</option>
+                           <option value="11">November</option>
+                           <option value="12">December</option>
+                       </select>
+                   </div>
+                   <div>
+                       <label class="block text-sm font-medium text-gray-700 mb-2">Company</label>
+                       <input name="company" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" type="text" placeholder="e.g. Universal Pictures" required>
+                   </div>
+                   <div>
+                       <label class="block text-sm font-medium text-gray-700 mb-2">Writer</label>
+                       <input name="writer" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" type="text" placeholder="e.g. Jane Doe" required>
+                   </div>
+                   <div>
+                       <label class="block text-sm font-medium text-gray-700 mb-2">Director</label>
+                       <input name="director" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" type="text" placeholder="e.g. John Smith" required>
+                   </div>
+               </div>
+           </div>
+           <button class="mt-8 w-full bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-300 text-lg font-semibold">
+               Predict Revenue
+           </button>
+       </form>
 
-        <div>
-            <label for="release_month">Release Month</label>
-            <input type="range" name="release_month" min="1" max="12" step="1" oninput="this.nextElementSibling.value = this.value" style="width: 150px;">
-            <output>6</output>
-        </div>
 
-        <button type="submit">Predict Revenue</button>
-    </form>
+       {% if prediction %}
+       <div class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+           <h2 class="text-3xl font-semibold text-indigo-800 mb-6">Prediction Results</h2>
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+               <div class="p-6 bg-indigo-50 rounded-xl">
+                   <h3 class="text-xl font-medium text-indigo-700 mb-3">Predicted Revenue ({{ year }} USD)</h3>
+                   <p class="text-4xl font-bold text-indigo-600">{{ prediction }}</p>
+               </div>
+               <div class="p-6 bg-indigo-50 rounded-xl">
+                   <h3 class="text-xl font-medium text-indigo-700 mb-3">Predicted Revenue (2020 USD)</h3>
+                   <p class="text-4xl font-bold text-indigo-600">{{ prediction_inflation_2020 }}</p>
+               </div>
+           </div>
+           <div class="mt-8 p-6 bg-indigo-50 rounded-xl">
+               <h3 class="text-xl font-medium text-indigo-700 mb-3">Confidence Interval</h3>
+               <p class="text-4xl font-bold text-indigo-600">{{ lower_bound }} - {{ upper_bound }}</p>
+           </div>
+       </div>
 
-    {% if prediction %}
-        <h3>Predicted Revenue</h3>
-        <p>{{ prediction }}</p>
-        
-        <h3>Confidence Interval</h3>
-        <p>{{ lower_bound }} - {{ upper_bound }}</p>
 
-        <h3>Explanation</h3>
-        <p>{{ explanation }}</p>
+       <div class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+           <h2 class="text-3xl font-semibold text-indigo-800 mb-6">Explanation</h2>
+           <p class="text-gray-600 text-lg mb-8">
+               {{ explanation }}
+           </p>
+           <h3 class="text-2xl font-medium text-indigo-700 mb-4">Feature Importance Graph</h3>
+           <div class="bg-indigo-50 h-64 rounded-xl flex items-center justify-center">
+               <img src="data:image/png;base64,{{ feature_importance_img }}" alt="Feature Importance" style="max-width:100%; max-height:100%;">
+           </div>
+       </div>
+       {% endif %}
 
-        {% if similar_movies %}
-            <h3>Similar Movies for Comparison</h3>
-            <ul>
-                {% for movie in similar_movies %}
-                    <li>{{ movie.name }}: {{ movie.gross_adjusted }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
 
-        <h3>Feature Importance</h3>
-        <img src="data:image/png;base64,{{ feature_importance_img }}" alt="Feature Importance">
-    {% endif %}
+       <div class="bg-white rounded-2xl shadow-xl p-8">
+           <h2 class="text-3xl font-semibold text-indigo-800 mb-6">How to Use This Tool</h2>
+           <div class="space-y-4 text-gray-600">
+               <p><span class="font-medium text-indigo-600">Year of Release:</span> The year the movie was released.</p>
+               <p><span class="font-medium text-indigo-600">Budget:</span> Estimated production budget in USD. Generally, a higher budget may lead to higher revenue.</p>
+               <p><span class="font-medium text-indigo-600">Runtime:</span> Duration of the movie. Longer or shorter runtimes can impact audience retention.</p>
+               <p><span class="font-medium text-indigo-600">Release Month:</span> The month in which the movie was released. Certain months, such as summer and holiday seasons, are often high-demand periods.</p>
+           </div>
+       </div>
+   </div>
 
-    <h3>How to Use This Tool</h3>
-    <p><strong>Year of Release:</strong> The year the movie was released.</p>
-    <p><strong>Budget:</strong> Estimated production budget in USD. Generally, a higher budget may lead to higher revenue.</p>
-    <p><strong>Runtime:</strong> Duration of the movie. Longer or shorter runtimes can impact audience retention.</p>
-    <p><strong>Release Month:</strong> The month in which the movie was released. Certain months, such as summer and holiday seasons, are often high-demand periods.</p>
+
+   <script>
+       const yearInput = document.querySelector('input[name="year"]');
+       if (yearInput) {
+           yearInput.addEventListener('input', function(e) {
+               const yearDisplay = document.getElementById('inputYear');
+               if (yearDisplay) {
+                   yearDisplay.textContent = e.target.value || 'Input Year';
+               }
+           });
+       }
+   </script>
 </body>
 </html>
+
+
+
