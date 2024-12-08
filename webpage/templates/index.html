@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Office Revenue Prediction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Box Office Revenue Prediction</h1>
+    <p>Enter the details of a movie to predict its estimated box office revenue.</p>
+    
+    <form method="POST" action="/" style="display: flex; flex-direction: row; gap: 20px; align-items: center;">
+        <div>
+            <label for="year">Year of Release:</label>
+            <input type="number" name="year" placeholder="e.g., 1980" required style="width: 80px;">
+        </div>
+
+        <div>
+            <label for="budget">Budget (in dollars)</label>
+            <input type="range" name="budget" min="1000000" max="500000000" step="1000000" oninput="this.nextElementSibling.value = this.value" style="width: 150px;">
+            <output>45000000</output>
+        </div>
+
+        <div>
+            <label for="runtime">Runtime (in minutes)</label>
+            <input type="range" name="runtime" min="60" max="180" step="1" oninput="this.nextElementSibling.value = this.value" style="width: 150px;">
+            <output>120</output>
+        </div>
+
+        <div>
+            <label for="release_month">Release Month</label>
+            <input type="range" name="release_month" min="1" max="12" step="1" oninput="this.nextElementSibling.value = this.value" style="width: 150px;">
+            <output>6</output>
+        </div>
+
+        <button type="submit">Predict Revenue</button>
+    </form>
+
+    {% if prediction %}
+        <h3>Predicted Revenue</h3>
+        <p>{{ prediction }}</p>
+        
+        <h3>Confidence Interval</h3>
+        <p>{{ lower_bound }} - {{ upper_bound }}</p>
+
+        <h3>Explanation</h3>
+        <p>{{ explanation }}</p>
+
+        {% if similar_movies %}
+            <h3>Similar Movies for Comparison</h3>
+            <ul>
+                {% for movie in similar_movies %}
+                    <li>{{ movie.name }}: {{ movie.gross_adjusted }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h3>Feature Importance</h3>
+        <img src="data:image/png;base64,{{ feature_importance_img }}" alt="Feature Importance">
+    {% endif %}
+
+    <h3>How to Use This Tool</h3>
+    <p><strong>Year of Release:</strong> The year the movie was released.</p>
+    <p><strong>Budget:</strong> Estimated production budget in USD. Generally, a higher budget may lead to higher revenue.</p>
+    <p><strong>Runtime:</strong> Duration of the movie. Longer or shorter runtimes can impact audience retention.</p>
+    <p><strong>Release Month:</strong> The month in which the movie was released. Certain months, such as summer and holiday seasons, are often high-demand periods.</p>
+</body>
+</html>
