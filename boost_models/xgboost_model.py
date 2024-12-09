@@ -18,6 +18,25 @@ data = pd.read_csv(data_path)
 # data_path = '../data/final_prediction_dataset.csv'
 # data = pd.read_csv(data_path)
 
+#XGB wrapper to target failure of compatibility with different dependencies 
+class CustomXGBRegressor(BaseEstimator, RegressorMixin):
+    def __init__(self, **kwargs):
+        self.model = XGBRegressor(**kwargs)
+
+    def fit(self, X, y):
+        self.model.fit(X, y)
+        return self
+
+    def predict(self, X):
+        return self.model.predict(X)
+
+    def __sklearn_tags__(self):
+        return {
+            "non_deterministic": False,
+            "multioutput": False,
+            "requires_positive_X": False,
+            "poor_score": False,
+        }
 
 # Specify target and features
 target_column = 'gross_adjusted'
@@ -55,7 +74,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Build pipeline
 model_pipeline = Pipeline([
    ('preprocessor', preprocessor),
-   ('regressor', XGBRegressor(n_estimators=100, random_state=42))
+   ('regressor', CustomXGBRegressor(n_estimators=100, random_state=42))
 ])
 
 
