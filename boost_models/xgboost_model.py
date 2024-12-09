@@ -7,10 +7,16 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import numpy as np
 
+import os
+
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(current_dir, '../data/final_prediction_dataset.csv')
+data = pd.read_csv(data_path)
 
 # Load the dataset
-data_path = '../data/final_prediction_dataset.csv'
-data = pd.read_csv(data_path)
+# data_path = '../data/final_prediction_dataset.csv'
+# data = pd.read_csv(data_path)
 
 
 # Specify target and features
