@@ -5,8 +5,8 @@ from xgboost import XGBRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from sklearn.base import BaseEstimator, RegressorMixin
 import numpy as np
-
 import os
 
 # Get the directory of the current script
