@@ -32,10 +32,10 @@ class CustomXGBRegressor(BaseEstimator, RegressorMixin):
 
     def __sklearn_tags__(self):
         return {
-            "non_deterministic": False,
+            "non_deterministic": True,
             "multioutput": False,
             "requires_positive_X": False,
-            "poor_score": False,
+            "requires_fit": True,
         }
 
 # Specify target and features
