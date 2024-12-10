@@ -9,7 +9,7 @@ import numpy as np
 
 
 # Load the dataset
-data_path = '../data/final_prediction_dataset.csv'
+data_path = 'final_prediction_dataset.csv'
 data = pd.read_csv(data_path)
 
 
