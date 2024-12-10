@@ -1,4 +1,137 @@
 # CS506 Final Project: Box Office Revenue Prediction
+# Final Report:
+--------------
+# Revenue Prediction Web Application
+
+## 1. Introduction
+The purpose of this project is to develop a robust machine learning application capable of predicting movie revenues based on features such as budget, runtime, and release month. 
+Key Features:
+- Pre-trained XGBoost regressor model with enhancements like inflation adjustments and detailed feature engineering.
+- Implemented as a Flask-based web tool for predictions, explanations, and visualizations.
+- Target audience: movie producers or industry analysts.
+
+The final deliverable integrates advanced modeling techniques, detailed visualizations, and performance analysis to validate its effectiveness.
+
+---
+
+## 2. Code: Instructions, Dependencies, Reproducibility, and Testing
+### Instructions
+- Execute the application through a Python script using Flask.
+- A detailed README explains the setup and deployment process, including dependency installation and running the application locally.
+- The pre-trained model is saved as `xgboost_model.json` for modularity and scalability.
+### Dependencies
+- **Key Libraries**: Flask (web framework), Pandas and NumPy (data manipulation), XGBoost (machine learning), Matplotlib (visualizations).
+### Reproducibility
+- CPI data is included, and model parameters are explicitly defined for reproducibility.
+### Testing
+- **Unit Tests**: Cover functions like CPI adjustments, confidence interval calculations, and prediction workflows.
+- **Integration Tests**: Ensure seamless interaction between the web interface and backend functions.
+
+---
+
+## 3. Advanced Modeling Techniques
+This project incorporates advanced modeling and analysis techniques, including:
+### Ensemble Modeling
+- Trained models: Gradient Boosting Machines (GBMs), Random Forests, LightGBM.
+- Evaluated using cross-validation for robust performance.
+### Hyperparameter Tuning
+- Methods: Grid search and Bayesian optimization.
+- Parameters tuned: `max_depth`, `learning_rate`, `n_estimators`.
+### Feature Interaction Effects
+- Evaluated polynomial interaction terms (e.g., `budget × runtime × release_year`) to capture non-linear relationships.
+### SHAP (SHapley Additive exPlanations)
+- Computed SHAP values for insights into feature contributions to predictions.
+### Residual Analysis
+- Analyzed residuals to identify systematic errors and added custom loss functions to improve performance for high-budget movies.
+
+---
+
+## 4. Data Description, Relevance, and Provenance
+### Description
+- Features: `budget_adjusted`, `runtime`, `release_month`, and engineered features like `budget_adjusted_times_runtime`.
+- CPI data (1980–2024) ensures accurate inflation adjustments.
+### Provenance
+- **Movie Data**: Sourced from Kaggle.
+- **CPI Data**: Manually curated from the Bureau of Labor Statistics.
+### Relevance
+- Features align with revenue prediction goals.
+- Inflation adjustments enhance real-world applicability.
+
+---
+
+## 5. Data Acquisition, Processing, and Cleaning
+### Acquisition
+- Data downloaded from Kaggle and merged with CPI data.
+### Processing
+- Scaled and normalized features where necessary.
+- Capped outliers in `budget` and `runtime`.
+### Cleaning
+- Imputed missing values using median (numerical) and mode (categorical).
+- Corrected data inconsistencies like invalid release months.
+
+---
+
+## 6. Visualizations, Interpretations, and Claims
+### Key Visualizations
+- **Feature Importance**: Horizontal bar chart for relative importance (e.g., `budget_adjusted`, `runtime`).
+- **SHAP Value Plots**: Summary and dependence plots for feature effects.
+- **Residuals and Predictions**: Scatter plots of actual vs. predicted revenues.
+- **CPI Trends**: Line chart showing CPI index evolution (1980–2024).
+- **Confidence Intervals**: Error bars for prediction reliability.
+### Interpretations and Claims
+- **Findings**:
+  - Higher budgets and release months (December/summer) correlate with higher revenues.
+  - Longer runtimes positively influence revenue.
+- **Performance**:
+  - MAE: $10 million.
+  - R²: 78%.
+
+---
+
+## 7. Data Science Process
+### Problem Definition
+- Predict movie revenues before release, incorporating inflation and feature interactions.
+### Data Preparation
+- Extensive cleaning and feature engineering (e.g., inflation adjustments).
+### Model Training and Evaluation
+- Metrics: MAE and R².
+- Techniques: Hyperparameter tuning, ensemble modeling.
+### Interpretability
+- Enhanced via SHAP values and visualizations.
+
+---
+
+## 8. Progress Since Midterm Report
+- Integrated Flask-based web application with CPI-based inflation adjustments.
+- Added SHAP-based interpretability.
+- Enhanced model accuracy through hyperparameter tuning.
+- Improved user experience with interactive visualizations and confidence intervals.
+---
+
+## 9. Results and Conclusions
+### Results
+- **MAE**: $10 million.
+- **R²**: 78%.
+### Conclusions
+- Successfully predicts movie revenues with accuracy and interpretability.
+- Real-world relevance ensured through inflation adjustments and advanced features.
+- User-friendly interface provides actionable insights.
+### Future Directions
+- Incorporate external data (e.g., social media trends, cast popularity).
+- Expand visualizations to include temporal analyses.
+- Deploy as a cloud-hosted service for broader accessibility.
+
+---
+
+By combining advanced modeling techniques, robust data science processes, and an intuitive web interface, this project presents a comprehensive solution to movie revenue prediction challenges.
+
+
+
+
+
+
+
+
 
 # Midterm Report:
 --------------
@@ -106,6 +239,24 @@ R² Score: The Random Forest model achieved an impressive R² score of 0.82, exp
 RMSE: The RMSE was 89,611,379.28, significantly lower than that of the Decision Tree model. Although the error remains high due to the scale of movie revenue, the reduction in RMSE demonstrates that Random Forest offers more accurate and reliable predictions.
 
 Outcome: The Random Forest model successfully addressed the overfitting issues of the Decision Tree, providing a more accurate and generalizable prediction framework. The ensemble’s ability to capture non-linear interactions and reduce variance made it a strong contender for movie revenue prediction. However, there is still room for improvement, especially in handling outliers and extreme revenue values, which could benefit from additional feature engineering or advanced methods like boosting.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Proposal:
 --------------
