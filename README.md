@@ -1,134 +1,191 @@
 # CS506 Final Project: Box Office Revenue Prediction
-# Final Report:
---------------
-# Revenue Prediction Web Application
+**Final Project Report: Movie Revenue Prediction Analysis**
 
-## 1. Introduction
-The purpose of this project is to develop a robust machine learning application capable of predicting movie revenues based on features such as budget, runtime, and release month. 
-Key Features:
-- Pre-trained XGBoost regressor model with enhancements like inflation adjustments and detailed feature engineering.
-- Implemented as a Flask-based web tool for predictions, explanations, and visualizations.
-- Target audience: movie producers or industry analysts.
+### Introduction
 
-The final deliverable integrates advanced modeling techniques, detailed visualizations, and performance analysis to validate its effectiveness.
+The objective of this project was to build a machine learning model capable of predicting movie gross revenues using a range of features. These included budget, runtime, release month, and interaction variables. The results of the analysis provided insights into how key factors contribute to movie revenue, supported by a series of visualizations and statistical evaluations.
 
 ---
 
-## 2. Code: Instructions, Dependencies, Reproducibility, and Testing
-### Instructions
-- Execute the application through a Python script using Flask.
-- A detailed README explains the setup and deployment process, including dependency installation and running the application locally.
-- The pre-trained model is saved as `xgboost_model.json` for modularity and scalability.
-### Dependencies
-- **Key Libraries**: Flask (web framework), Pandas and NumPy (data manipulation), XGBoost (machine learning), Matplotlib (visualizations).
-### Reproducibility
-- CPI data is included, and model parameters are explicitly defined for reproducibility.
-### Testing
-- **Unit Tests**: Cover functions like CPI adjustments, confidence interval calculations, and prediction workflows.
-- **Integration Tests**: Ensure seamless interaction between the web interface and backend functions.
+### Code and Reproducibility
+
+#### **Makefile Overview**
+
+The provided `Makefile` serves as an essential component to ensure reproducibility, ease of use, and clarity in executing the project. Below are the key functionalities it provides:
+
+1. **`install`**: Creates a virtual environment using `venv`, upgrades `pip`, and installs the required dependencies listed in `requirements.txt`. This ensures the environment is consistent across different systems.
+   ```bash
+   make install
+   ```
+
+2. **`run`**: Activates the virtual environment and launches the Flask web application for the movie revenue predictor. The app runs on `http://0.0.0.0:5001`.
+   ```bash
+   make run
+   ```
+
+3. **`clean`**: Removes the virtual environment entirely, ensuring a fresh start for new installations.
+   ```bash
+   make clean
+   ```
+
+4. **`freeze`**: Captures the exact dependencies and their versions into a `requirements.txt` file, aiding in reproducibility.
+   ```bash
+   make freeze
+   ```
+
+#### **Web Application Code Structure**
+
+The web application is built using Flask, with a primary entry point defined in `app.py`. Key components are outlined below:
+
+1. **Model Integration**:
+   - The pre-trained XGBoost model is loaded using `xgb.XGBRegressor`.
+   - Predictions are made by processing user inputs (e.g., budget, runtime, release month) and applying transformations to generate interaction variables such as `budget_adjusted_times_runtime`.
+
+2. **Endpoints**:
+   - **`GET`**: Renders the main HTML page (`index.html`) where users can input movie details.
+   - **`POST`**: Handles form submissions, calculates predictions, confidence intervals, and generates explanations based on user inputs.
+
+3. **Supporting Functions**:
+   - **`get_feature_importance`**: Generates a bar chart of feature importance from the XGBoost model.
+   - **`calculate_confidence_interval`**: Computes simplistic confidence intervals (+/-10% margin) around the predicted revenue.
+   - **`generate_explanation`**: Constructs natural-language explanations based on the user's input (e.g., highlighting the impact of budget or runtime).
+
+#### **Frontend Implementation**
+
+The frontend is a responsive web page built with **TailwindCSS** and custom JavaScript for user interactivity. Key sections include:
+
+1. **Input Form**:
+   - Users can enter details such as the movie's year of release, budget, runtime, and release month.
+   - Dropdowns and placeholders guide users on expected inputs.
+
+2. **Prediction Results**:
+   - Predicted revenue in both release-year and 2020-adjusted dollars is displayed.
+   - Confidence intervals are prominently shown to provide uncertainty estimates.
+
+3. **Feature Importance Visualization**:
+   - A dynamically generated feature importance graph (base64-encoded PNG) is embedded directly into the webpage.
+
+#### **Tests and Validation**
+
+Unit tests are provided in `tests/test.py` to validate the following:
+
+- Correct loading and initialization of the XGBoost model.
+- Proper calculation of inflation adjustment factors using CPI data.
+- Accurate prediction generation and comparison with known test cases.
+- Reproducibility of feature importance scores across runs.
+
+#### **Dependencies**
+
+The project relies on the following core dependencies, detailed in `requirements.txt`:
+
+- **Flask**: For web application development.
+- **pandas**: For data manipulation and preprocessing.
+- **xgboost**: For model training and prediction.
+- **numpy**: For numerical operations.
+- **matplotlib**: For visualizing feature importances.
+- **scikit-learn**: For evaluation metrics and additional model utilities.
 
 ---
 
-## 3. Advanced Modeling Techniques
-This project incorporates advanced modeling and analysis techniques, including:
-### Ensemble Modeling
-- Trained models: Gradient Boosting Machines (GBMs), Random Forests, LightGBM.
-- Evaluated using cross-validation for robust performance.
-### Hyperparameter Tuning
-- Methods: Grid search and Bayesian optimization.
-- Parameters tuned: `max_depth`, `learning_rate`, `n_estimators`.
-### Feature Interaction Effects
-- Evaluated polynomial interaction terms (e.g., `budget × runtime × release_year`) to capture non-linear relationships.
-### SHAP (SHapley Additive exPlanations)
-- Computed SHAP values for insights into feature contributions to predictions.
-### Residual Analysis
-- Analyzed residuals to identify systematic errors and added custom loss functions to improve performance for high-budget movies.
+### Data Overview
+
+The dataset contained historical data on movies, including their adjusted budgets, runtimes, gross adjusted revenues, release months, and interaction variables derived from these base features. The key features were:
+
+1. **Budget Adjusted**: The inflation-adjusted production budget of a movie.
+2. **Runtime**: The duration of the movie in minutes.
+3. **Release Month**: The month the movie was released, represented numerically.
+4. **Interaction Variables**: Multiplicative and ratio-based features such as:
+   - `budget_adjusted_times_runtime`
+   - `budget_adjusted_times_year`
+   - `budget_adjusted_to_year_ratio`
+   - `budget_adjusted_to_runtime_ratio`
+
+To enhance interpretability, we focused on features with correlations above 0.65 with the target variable (`gross_adjusted`). These included `budget_adjusted_times_runtime`, `budget_adjusted_times_year`, and `budget_adjusted_to_year_ratio`.
 
 ---
 
-## 4. Data Description, Relevance, and Provenance
-### Description
-- Features: `budget_adjusted`, `runtime`, `release_month`, and engineered features like `budget_adjusted_times_runtime`.
-- CPI data (1980–2024) ensures accurate inflation adjustments.
-### Provenance
-- **Movie Data**: Sourced from Kaggle.
-- **CPI Data**: Manually curated from the Bureau of Labor Statistics.
-### Relevance
-- Features align with revenue prediction goals.
-- Inflation adjustments enhance real-world applicability.
+### Model Overview
+
+We used an XGBoost Regressor trained on key features to predict `gross_adjusted`. The model incorporated:
+
+- Feature engineering with interaction variables.
+- Data cleaning to ensure no missing values in critical columns.
+- Hyperparameter tuning to optimize performance.
+
+The model achieved:
+
+- **Root Mean Squared Error (RMSE)**: 101,991,097.67
+- **R² Score**: 0.78
 
 ---
 
-## 5. Data Acquisition, Processing, and Cleaning
-### Acquisition
-- Data downloaded from Kaggle and merged with CPI data.
-### Processing
-- Scaled and normalized features where necessary.
-- Capped outliers in `budget` and `runtime`.
-### Cleaning
-- Imputed missing values using median (numerical) and mode (categorical).
-- Corrected data inconsistencies like invalid release months.
+### Key Visualizations and Insights
+
+#### 1. **3D Scatter Plot**
+
+The 3D scatter plot of runtime, predicted gross adjusted, and actual gross adjusted highlighted the clustering of movies with longer runtimes and higher predicted revenues. This visualization demonstrated the model's performance across different revenue ranges.
+
+#### 2. **Average Runtime and Budget by Year**
+
+This graph illustrated an upward trend in both average runtime and budget over the years, with notable spikes around major blockbuster periods. The increasing production budgets aligned with trends in rising movie revenue potential.
+
+#### 3. **Yearly Trend of Gross Adjusted**
+
+This visualization showed a steady increase in average gross adjusted revenues over the decades. Peaks in recent years reflected the dominance of high-budget productions.
+
+#### 4. **Prediction Variance by Key Features**
+
+A plot of variance in predictions against feature values revealed significant variability in movies with extreme budgets or runtimes. This suggested the potential for outlier-driven effects in high-budget productions.
+
+#### 5. **Permutation Importance Heatmap**
+
+The heatmap revealed that `budget_adjusted` and `budget_adjusted_times_runtime` were the most influential features in predicting movie revenues, reinforcing the importance of financial investment in movie success.
+
+#### 6. **Key Feature Pairplot**
+
+Pairplot visualizations highlighted strong positive relationships between `budget_adjusted` and `gross_adjusted`. A slight non-linear relationship with runtime was also evident, where optimal runtimes contributed positively to revenues.
+
+#### 7. **Learning Curve**
+
+The learning curve revealed that the model generalized well with increasing training data. While the train score was consistently high, test scores improved with more data, reflecting effective feature utilization.
+
+#### 8. **Hyperparameter Tuning Scores**
+
+The hyperparameter tuning graph demonstrated the importance of balancing training and testing scores. Increasing parameter values improved model performance up to a threshold, after which overfitting became evident.
+
+#### 9. **Confidence Intervals by Release Month**
+
+Confidence intervals for predictions across release months showed higher revenues in June, July, and December, aligning with industry trends for summer blockbusters and holiday releases.
+
+#### 10. **Distribution of Prediction Errors**
+
+The error distribution, centered around zero with minimal skew, confirmed the model’s predictive accuracy and robustness.
 
 ---
 
-## 6. Visualizations, Interpretations, and Claims
-### Key Visualizations
-- **Feature Importance**: Horizontal bar chart for relative importance (e.g., `budget_adjusted`, `runtime`).
-- **SHAP Value Plots**: Summary and dependence plots for feature effects.
-- **Residuals and Predictions**: Scatter plots of actual vs. predicted revenues.
-- **CPI Trends**: Line chart showing CPI index evolution (1980–2024).
-- **Confidence Intervals**: Error bars for prediction reliability.
-### Interpretations and Claims
-- **Findings**:
-  - Higher budgets and release months (December/summer) correlate with higher revenues.
-  - Longer runtimes positively influence revenue.
-- **Performance**:
-  - MAE: $10 million.
-  - R²: 78%.
+### Statistical Evaluation
+
+Correlation analyses confirmed the importance of interaction variables. For instance:
+
+- `budget_adjusted_times_runtime`: Correlation with `gross_adjusted` = 0.69
+- `budget_adjusted_times_year`: Correlation with `gross_adjusted` = 0.68
+- `writer_mean_gross`: Correlation with `gross_adjusted` = 0.78
+
+These features were instrumental in driving model performance.
 
 ---
 
-## 7. Data Science Process
-### Problem Definition
-- Predict movie revenues before release, incorporating inflation and feature interactions.
-### Data Preparation
-- Extensive cleaning and feature engineering (e.g., inflation adjustments).
-### Model Training and Evaluation
-- Metrics: MAE and R².
-- Techniques: Hyperparameter tuning, ensemble modeling.
-### Interpretability
-- Enhanced via SHAP values and visualizations.
+### Limitations and Future Work
+
+1. **Data Coverage**: While the dataset was comprehensive, it lacked certain variables like international box office revenues or marketing spend, which could enhance predictions.
+2. **Temporal Bias**: Older movies were underrepresented in terms of gross adjusted values due to incomplete data.
+3. **Model Enhancements**: Future iterations could incorporate ensemble techniques or external economic indicators to improve accuracy.
 
 ---
 
-## 8. Progress Since Midterm Report
-- Integrated Flask-based web application with CPI-based inflation adjustments.
-- Added SHAP-based interpretability.
-- Enhanced model accuracy through hyperparameter tuning.
-- Improved user experience with interactive visualizations and confidence intervals.
----
+### Conclusion
 
-## 9. Results and Conclusions
-### Results
-- **MAE**: $10 million.
-- **R²**: 78%.
-### Conclusions
-- Successfully predicts movie revenues with accuracy and interpretability.
-- Real-world relevance ensured through inflation adjustments and advanced features.
-- User-friendly interface provides actionable insights.
-### Future Directions
-- Incorporate external data (e.g., social media trends, cast popularity).
-- Expand visualizations to include temporal analyses.
-- Deploy as a cloud-hosted service for broader accessibility.
-
----
-
-By combining advanced modeling techniques, robust data science processes, and an intuitive web interface, this project presents a comprehensive solution to movie revenue prediction challenges.
-
-
-
-
-
+This project successfully demonstrated the utility of machine learning in predicting movie revenues. The insights gained from feature importance analyses and visualizations underscored the pivotal role of budget and runtime. The model’s performance metrics and visualizations provided a solid foundation for understanding key drivers of movie success.
 
 
 
