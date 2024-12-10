@@ -123,41 +123,61 @@ The model achieved:
 
 #### 1. **3D Scatter Plot**
 
+![image](https://github.com/user-attachments/assets/e2988a3e-ad15-400c-9c16-745894e41252)
+
 The 3D scatter plot of runtime, predicted gross adjusted, and actual gross adjusted highlighted the clustering of movies with longer runtimes and higher predicted revenues. This visualization demonstrated the model's performance across different revenue ranges.
 
 #### 2. **Average Runtime and Budget by Year**
+
+![image](https://github.com/user-attachments/assets/8d1bbd9c-c746-4394-9124-a09578c528c5)
 
 This graph illustrated an upward trend in both average runtime and budget over the years, with notable spikes around major blockbuster periods. The increasing production budgets aligned with trends in rising movie revenue potential.
 
 #### 3. **Yearly Trend of Gross Adjusted**
 
+![image](https://github.com/user-attachments/assets/bcdffdd4-bf20-480f-999d-01a0951d56c1)
+
 This visualization showed a steady increase in average gross adjusted revenues over the decades. Peaks in recent years reflected the dominance of high-budget productions.
 
 #### 4. **Prediction Variance by Key Features**
+
+![image](https://github.com/user-attachments/assets/74f83a6b-22ee-4e69-9d40-56363e343be2)
 
 A plot of variance in predictions against feature values revealed significant variability in movies with extreme budgets or runtimes. This suggested the potential for outlier-driven effects in high-budget productions.
 
 #### 5. **Permutation Importance Heatmap**
 
+![image](https://github.com/user-attachments/assets/31f72058-2e0a-439e-b031-ab8cc6861337)
+
 The heatmap revealed that `budget_adjusted` and `budget_adjusted_times_runtime` were the most influential features in predicting movie revenues, reinforcing the importance of financial investment in movie success.
 
 #### 6. **Key Feature Pairplot**
+
+![image](https://github.com/user-attachments/assets/52eab49b-3a26-4062-9f1f-83e0c65ee722)
 
 Pairplot visualizations highlighted strong positive relationships between `budget_adjusted` and `gross_adjusted`. A slight non-linear relationship with runtime was also evident, where optimal runtimes contributed positively to revenues.
 
 #### 7. **Learning Curve**
 
+![image](https://github.com/user-attachments/assets/d427bc80-f5b8-4897-95aa-5da482124ccb)
+
 The learning curve revealed that the model generalized well with increasing training data. While the train score was consistently high, test scores improved with more data, reflecting effective feature utilization.
 
 #### 8. **Hyperparameter Tuning Scores**
+
+![image](https://github.com/user-attachments/assets/100856c3-4da9-49b7-973c-5f27221587da)
 
 The hyperparameter tuning graph demonstrated the importance of balancing training and testing scores. Increasing parameter values improved model performance up to a threshold, after which overfitting became evident.
 
 #### 9. **Confidence Intervals by Release Month**
 
+![image](https://github.com/user-attachments/assets/d0e62a0a-e70e-4a74-adf6-6fb7d3db532d)
+
 Confidence intervals for predictions across release months showed higher revenues in June, July, and December, aligning with industry trends for summer blockbusters and holiday releases.
 
 #### 10. **Distribution of Prediction Errors**
+
+![image](https://github.com/user-attachments/assets/d63a7b3b-edbd-4bd5-9501-3b407cfa59be)
 
 The error distribution, centered around zero with minimal skew, confirmed the model’s predictive accuracy and robustness.
 
