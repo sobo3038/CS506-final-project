@@ -1,5 +1,5 @@
 # Define the environment variables
-APP_NAME = app.py
+APP_PATH = webpage/app.py
 VENV_DIR = venv
 
 # Create a virtual environment and install dependencies
@@ -13,7 +13,7 @@ install:
 # Run the Flask application
 run:
 	@echo "Activating virtual environment and running Flask app..."
-	. $(VENV_DIR)/bin/activate && flask run --host=0.0.0.0 --port=5000
+	. $(VENV_DIR)/bin/activate && FLASK_APP=$(APP_PATH) flask run --host=0.0.0.0 --port=5001
 
 # Clean up virtual environment
 clean:
