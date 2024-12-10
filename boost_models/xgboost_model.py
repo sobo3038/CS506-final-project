@@ -52,10 +52,8 @@ model_pipeline = Pipeline([
    ('regressor', XGBRegressor(n_estimators=100, random_state=42))
 ])
 
-
 # Train the model
 model_pipeline.fit(X_train, y_train)
-
 
 # Evaluate
 y_pred = model_pipeline.predict(X_test)
@@ -63,9 +61,7 @@ y_pred = model_pipeline.predict(X_test)
 rmse = mean_squared_error(y_test, y_pred, squared=False)
 print(f'RMSE: {rmse:.2f}')
 
-
 from sklearn.metrics import r2_score
-
 
 # Calculate R² score
 r2 = r2_score(y_test, y_pred)
