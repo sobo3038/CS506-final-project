@@ -4,7 +4,6 @@ import xgboost as xgb
 import matplotlib.pyplot as plt
 import io
 import base64
-import os
 import numpy as np
 
 
@@ -13,8 +12,7 @@ app = Flask(__name__)
 
 # Load the pre-trained XGBoost model
 model = xgb.XGBRegressor()
-model_path = os.path.join(os.path.dirname(__file__), "xgboost_model.json")
-model.load_model(model_path)
+model.load_model("xgboost_model.json")
 
 
 # Set the Matplotlib backend to 'Agg' to avoid GUI issues on some systems
@@ -188,6 +186,5 @@ def index():
 
 if __name__ == "__main__":
    app.run(debug=True)
-
 
 
