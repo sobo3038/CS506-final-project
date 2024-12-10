@@ -30,7 +30,8 @@ class CustomXGBRegressor(BaseEstimator, RegressorMixin):
     def predict(self, X):
         return self.model.predict(X)
 
-    def __sklearn_tags__(self):
+    def get_tags(self):
+        # Return the default tags from scikit-learn's BaseEstimator, customized as needed
         return {
             "non_deterministic": True,
             "multioutput": False,
