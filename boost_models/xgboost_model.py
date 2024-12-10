@@ -6,10 +6,10 @@ from sklearn.metrics import mean_squared_error
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import numpy as np
+import os
 
-
-# Load the dataset
-data_path = 'final_prediction_dataset.csv'
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+data_path = os.path.join(root_dir, 'data', 'final_prediction_dataset.csv')
 data = pd.read_csv(data_path)
 
 
@@ -70,6 +70,5 @@ from sklearn.metrics import r2_score
 # Calculate R² score
 r2 = r2_score(y_test, y_pred)
 print(f'R² Score: {r2:.2f}')
-
 
 
