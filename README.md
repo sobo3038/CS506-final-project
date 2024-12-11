@@ -5,6 +5,12 @@
 ### Youtube Link: 
 https://youtu.be/IGwYjbQEvsE
 
+### Team:
+Sofia Boada
+Ana Julia Bortolossi
+Suraj Godithi
+Francisco Moguel 
+
 ### Introduction
 
 The objective of this project was to build a machine learning model capable of predicting movie gross revenues using a range of features. These included budget, runtime, release month, and interaction variables. The results of the analysis provided insights into how key factors contribute to movie revenue, supported by a series of visualizations and statistical evaluations. Once the model was fit into the data, we generated an interactive webpage that is capable of forecasting the gross revenus the given movie (with the input parameters).
