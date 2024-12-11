@@ -1,7 +1,8 @@
 # CS506 Final Project: Box Office Revenue Prediction
 **Final Project Report: Movie Revenue Prediction Analysis**
+---
 
-## Youtube Link: 
+### Youtube Link: 
 https://youtu.be/IGwYjbQEvsE
 
 ### Introduction
