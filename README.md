@@ -6,10 +6,13 @@
 https://youtu.be/IGwYjbQEvsE
 
 ### Team:
-Sofia Boada
-Ana Julia Bortolossi
-Suraj Godithi
-Francisco Moguel 
+Sofia Boada: sofiabl@bu.edu
+
+Ana Julia Bortolossi: anajbdbl@bu.edu
+
+Suraj Godithi: surajg@bu.edu
+
+Francisco Moguel: fjmoguel@bu.edu 
 
 ### Introduction
 
