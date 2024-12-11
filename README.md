@@ -12,7 +12,6 @@ https://youtu.be/IGwYjbQEvsE
 - Francisco Moguel: fjmoguel@bu.edu 
 
 **Data Sources:**
-- **The Movie Database (TMDb) API**: Provides movie metadata such as budget, genre, cast, and director.
 - **Kaggle Datasets**: [Movies Dataset](https://www.kaggle.com/datasets/danielgrijalvas/movies)
 
 ### Introduction
