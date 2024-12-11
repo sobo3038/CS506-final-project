@@ -209,13 +209,13 @@ The correlation analysis highlights the significant impact of interaction variab
 
 ---
 
-### Conclusion
+### ### Conclusion
 
-This project successfully demonstrated the utility of machine learning in predicting movie revenues. The insights gained from feature importance analyses and visualizations underscored the pivotal role of budget and runtime. The model’s performance metrics and visualizations provided a solid foundation for understanding key drivers of movie success.
+This project has demonstrated the potential of machine learning models, particularly XGBoost, in predicting movie revenues with a high degree of accuracy and interpretability. The integration of detailed feature engineering, such as interaction variables and inflation adjustments, enabled the model to capture complex relationships between budget, runtime, release month, and revenue. The strong performance metrics—such as an R² score of 0.78 and a RMSE of approximately $101 million—validate the model's ability to generalize across diverse types of movies. By leveraging both statistical and domain knowledge, the project succeeded in identifying critical factors like budget-adjusted runtime and the creative team's past success in shaping box office outcomes. 
 
+The inclusion of an interactive web application marks a significant step in translating these findings into practical tools for industry professionals. The Flask-based interface allows users to input movie parameters and instantly receive revenue predictions, along with confidence intervals and feature importance visualizations. This interactive design makes the tool accessible and actionable for stakeholders such as producers, studios, and analysts. Additionally, the ability to explain predictions with natural language and graphical insights provides users with a deeper understanding of how specific decisions—like increasing a movie's budget or strategically timing its release—can impact financial success. 
 
-
-
+Despite the project’s successes, certain limitations offer opportunities for future development. Expanding the dataset to include international box office revenues, marketing spend, and social media trends could significantly enhance the model's predictive power. Furthermore, addressing temporal biases by ensuring better representation of older movies could make the model more universally applicable. Future iterations could also explore deploying the application on cloud platforms for scalability, integrating real-time data, and incorporating ensemble methods for further accuracy improvements. Ultimately, this project underscores the value of combining data science with industry expertise, providing a robust framework to understand and predict the dynamics of box office performance.
 
 
 # Midterm Report:
