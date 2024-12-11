@@ -7,7 +7,7 @@ https://youtu.be/IGwYjbQEvsE
 
 ### Introduction
 
-The objective of this project was to build a machine learning model capable of predicting movie gross revenues using a range of features. These included budget, runtime, release month, and interaction variables. The results of the analysis provided insights into how key factors contribute to movie revenue, supported by a series of visualizations and statistical evaluations.
+The objective of this project was to build a machine learning model capable of predicting movie gross revenues using a range of features. These included budget, runtime, release month, and interaction variables. The results of the analysis provided insights into how key factors contribute to movie revenue, supported by a series of visualizations and statistical evaluations. Once the model was fit into the data, we generated an interactive webpage that is capable of forecasting the gross revenus the given movie (with the input parameters).
 
 ---
 
@@ -43,10 +43,10 @@ The web application is built using Flask, with a primary entry point defined in 
 
 1. **Model Integration**:
    - The pre-trained XGBoost model is loaded using `xgb.XGBRegressor`.
-   - Predictions are made by processing user inputs (e.g., budget, runtime, release month) and applying transformations to generate interaction variables such as `budget_adjusted_times_runtime`.
+   - Predictions are made by processing user inputs (e.g., budget, runtime, release month) and applying transformations to generate interaction variables such as `budget_adjusted_times_runtime`. We tried ensamble and linear midels beforehand, however, boosting provided the best tradeoff in accuracy and runtime to build our app upon.
 
 2. **Endpoints**:
-   - **`GET`**: Renders the main HTML page (`index.html`) where users can input movie details.
+   - **`GET`**: Renders the main HTML page (`index.html`) where users can input movie details. It also provides an explanation of why the result happened and why. It also displays a variable importance graph. 
    - **`POST`**: Handles form submissions, calculates predictions, confidence intervals, and generates explanations based on user inputs.
 
 3. **Supporting Functions**:
@@ -141,7 +141,7 @@ This graph illustrated an upward trend in both average runtime and budget over t
 
 ![image](https://github.com/user-attachments/assets/bcdffdd4-bf20-480f-999d-01a0951d56c1)
 
-This visualization showed a steady increase in average gross adjusted revenues over the decades. Peaks in recent years reflected the dominance of high-budget productions.
+This visualization showed a steady increase in average gross adjusted revenues over the decades. Peaks in recent years reflected the dominance of high-budget productions. It also displays how movies have higher investment in much more marketing than in the past. Finally, after investigation, it also helps on how movies have higher revenues in the internatational box office than in past decades. 
 
 #### 4. **Prediction Variance by Key Features**
 
@@ -183,7 +183,7 @@ Confidence intervals for predictions across release months showed higher revenue
 
 ![image](https://github.com/user-attachments/assets/d63a7b3b-edbd-4bd5-9501-3b407cfa59be)
 
-The error distribution, centered around zero with minimal skew, confirmed the model’s predictive accuracy and robustness.
+The error distribution, centered around zero with minimal skew, confirmed the model’s predictive accuracy and robustness. It shows slight underprediction across the model.
 
 ---
 
@@ -196,6 +196,8 @@ Correlation analyses confirmed the importance of interaction variables. For inst
 - `writer_mean_gross`: Correlation with `gross_adjusted` = 0.78
 
 These features were instrumental in driving model performance.
+
+The correlation analysis highlights the significant impact of interaction variables in predicting movie revenues. The strong correlation between budget_adjusted_times_runtime (0.69) and gross_adjusted suggests that higher budgets combined with optimal runtimes are a critical determinant of box office success. This could imply that well-funded movies with carefully balanced runtimes resonate better with audiences, achieving higher revenues. Similarly, the correlation of budget_adjusted_times_year (0.68) with gross_adjusted indicates that the interplay between production budgets and the release year contributes to revenue trends, possibly reflecting inflation adjustments and evolving audience preferences. Furthermore, the writer_mean_gross correlation (0.78) underscores the importance of creative talent in driving revenue, as successful writers with a track record of high-grossing films likely bring credibility and audience anticipation to new projects. These insights affirm the role of strategic budgeting, runtime planning, and leveraging established creative talent in maximizing box office potential.
 
 ---
 
@@ -210,6 +212,8 @@ These features were instrumental in driving model performance.
 ### Conclusion
 
 This project successfully demonstrated the utility of machine learning in predicting movie revenues. The insights gained from feature importance analyses and visualizations underscored the pivotal role of budget and runtime. The model’s performance metrics and visualizations provided a solid foundation for understanding key drivers of movie success.
+
+
 
 
 
