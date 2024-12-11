@@ -1,6 +1,9 @@
 # CS506 Final Project: Box Office Revenue Prediction
 **Final Project Report: Movie Revenue Prediction Analysis**
 
+## Youtube Link: 
+https://youtu.be/IGwYjbQEvsE
+
 ### Introduction
 
 The objective of this project was to build a machine learning model capable of predicting movie gross revenues using a range of features. These included budget, runtime, release month, and interaction variables. The results of the analysis provided insights into how key factors contribute to movie revenue, supported by a series of visualizations and statistical evaluations.
